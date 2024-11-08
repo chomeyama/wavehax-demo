@@ -27,7 +27,7 @@
 
         <div class="paper_info">
           <h1>Wavehax</h1>
-          <h2>Alias-Free Neural Waveform Synthesis with 2D Convolution and Harmonic Prior for Reliable Complex
+          <h2>Aliasing-Free Neural Waveform Synthesis Based on 2D Convolution and Harmonic Prior for Reliable Complex
             Spectrogram Estimation</h2>
           <h3 style="margin-top: 1rem;">
             <a class="link" href="https://chomeyama.github.io/Profile/">Reo Yoneyama</a><sup>1</sup>,
@@ -35,7 +35,7 @@
             <a class="link" href="https://r9y9.github.io/">Ryuichi Yamamoto</a><sup>1,2</sup>,
             <a class="link" href="https://sites.google.com/site/tomokitoda/">Tomoki Toda</a><sup>1</sup>
           </h3>
-          <h3 style="margin-top: 0.75rem;"><sup>1</sup>Nagoya University, Japan, <sup>2</sup>LY Corp., Japan</h3>
+          <h3 style="margin-top: 0.75rem;"><sup>1</sup>Nagoya University, Japan, <sup>2</sup>LY Corporation, Japan</h3>
           <h3 style="margin-top: 0.75rem;">Submitting
             <!-- <h3 style="margin-top: 0.75rem;">Submitted to IEEE/ACM Transactions on Audio Speech and Language Processing -->
           </h3>
@@ -56,14 +56,33 @@
 
         <h2 class="sectitle">Abstract</h2>
         <div id="abstract" class="section">
-          <p></p>
+          <p>Neural vocoders often struggle with aliasing in latent feature spaces, primarily caused by time-domain
+            nonlinear operations and resampling layers. Aliasing folds high-frequency components into the low-frequency
+            range, making aliased and original frequency components indistinguishable and introducing two practical
+            issues. First, aliasing complicates the synthesis process, as subsequent convolutional layers must address
+            these aliasing effects, increasing computational complexity. Second, it limits extrapolation performance,
+            particularly in handling high fundamental frequencies, which degrades the perceptual quality of generated
+            waveforms. This paper demonstrates that 1) time-domain nonlinear operations inevitably introduce aliasing
+            but provide a strong inductive bias that supports harmonic generation, and 2) time-frequency-domain
+            processing can achieve aliasing-free waveform synthesis but lacks the inductive biases effective for
+            harmonic generation. Building on this insight, we propose Wavehax, an aliasing-free neural WAVEform
+            generator that integrates 2D convolution and a HArmonic-prior spectrogram for reliable Complex Spectrogram
+            estimation. Experimental results show that Wavehax achieves speech quality comparable to existing
+            high-fidelity neural vocoders and exhibits exceptional robustness in scenarios requiring high fundamental
+            frequency extrapolation, where aliasing effects are particularly pronounced. Moreover, Wavehax reduces
+            multiply-accumulate operations by 95.4% and model size by 95.5% compared to HiFi-GAN V1, while achieving
+            over four times faster CPU inference speed.</p>
         </div>
 
         <h2 class="sectitle">Method</h2>
         <div id="method" class="section">
           <figure>
             <img src="img/model.png" style="margin: 1rem auto; width: 80%;" alt="Method" title="method">
-            <figcaption>
+            <figcaption>This diagram provides an overview of Wavehax. The kernel width of the 1D convolution is set to
+              7, while the kernel size of the depthwise convolution is set to 7 × 7. The numbers of hidden channels,
+              denoted as C and C', are set to 32 and 64, respectively. The number of frequency bins, F, is set to 241,
+              calculated as half of the discrete Fourier transform points plus one. T and N represent the number of time
+              steps in the waveforms and time frames in the features, respectively.
             </figcaption>
           </figure>
         </div>
